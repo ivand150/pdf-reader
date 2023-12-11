@@ -5,14 +5,6 @@ import xlsxwriter
 # creating pdf path
 PDF_PATH = 'nomina.pdf'
 
-# Workbook() takes one, non-optional, argument
-# which is the filename that we want to create.
-workbook = xlsxwriter.Workbook('test.xlsx')
-
-# The workbook object is then used to add new
-# worksheet via the add_worksheet() method.
-worksheet = workbook.add_worksheet()
-
 # creating a pdf file object
 pdfFileObj = open(PDF_PATH, 'rb')
 
@@ -36,7 +28,24 @@ def search_in_lines(lines, text_to_find):
         if found_line != -1:
             print(line[len(line) - 8:len(line)])
             return line[len(line) - 8:len(line)]
-        return None
+
+def create_xlsx_file(text, value):
+    """Function to create xlsx files
+
+    Args:
+        text (string): text to fill first cell
+        value (string): value to fill second cell 
+    """
+    # Workbook() takes one, non-optional, argument
+    # which is the filename that we want to create.
+    workbook = xlsxwriter.Workbook('test.xlsx')
+
+    # The workbook object is then used to add new
+    #worksheet via the add_worksheet() method.
+    worksheet = workbook.add_worksheet()
+    worksheet.write('A1', text + ':')
+    worksheet.write('B1', value)
+    workbook.close()
 
 # extracting text from pages
 for page in pdfReader.pages:
@@ -45,12 +54,10 @@ for page in pdfReader.pages:
     print(text_split_in_lines)
     TEXT_TO_FIND = 'Salario convenio'
     result = search_in_lines(text_split_in_lines, TEXT_TO_FIND)
-    worksheet.write('A1', TEXT_TO_FIND + ':')
-    worksheet.write('B1', result)
+    print(result)
+    if result:
+        create_xlsx_file(TEXT_TO_FIND, result)
     PAGE_NUMBER += 1
 
 # closing the pdf file object
 pdfFileObj.close()
-
-# closing workbook
-workbook.close()
