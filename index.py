@@ -36,6 +36,7 @@ def search_in_lines(lines, text_to_find):
         if found_line != -1:
             print(line[len(line) - 8:len(line)])
             return line[len(line) - 8:len(line)]
+        return None
 
 # extracting text from pages
 for page in pdfReader.pages:
