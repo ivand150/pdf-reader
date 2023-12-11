@@ -15,10 +15,23 @@ print(len(pdfReader.pages))
 
 PAGE_NUMBER = 1
 
+def search_in_lines(lines):
+    """Function printing the found price
+
+    Args:
+        lines (string[]): lines of text to search
+    """
+    for line in lines:
+        found_line = line.find('Salario convenio')
+        if found_line != -1:
+            print(line[len(line) - 8:len(line)])
+
 # extracting text from pages
 for page in pdfReader.pages:
     print('PAGE: ', PAGE_NUMBER)
-    print(page.extract_text())
+    text_split_in_lines = page.extract_text().splitlines()
+    print(text_split_in_lines)
+    search_in_lines(text_split_in_lines)
     PAGE_NUMBER += 1
 
 # closing the pdf file object
