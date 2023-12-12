@@ -57,6 +57,8 @@ for page in pdfReader.pages:
     print(result)
     if result:
         create_xlsx_file(TEXT_TO_FIND, result)
+    else:
+        print('text not found in page:', PAGE_NUMBER)
     PAGE_NUMBER += 1
 
 # closing the pdf file object
