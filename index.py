@@ -26,7 +26,6 @@ def search_in_lines(lines, text_to_find):
     for line in lines:
         found_line = line.find(text_to_find)
         if found_line != -1:
-            print(line[len(line) - 8:len(line)])
             return line[len(line) - 8:len(line)]
 
 def create_xlsx_file(text, value):
