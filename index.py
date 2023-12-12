@@ -48,6 +48,7 @@ def create_xlsx_file(text, value):
     workbook.close()
 
 # extracting text from pages
+# TODO: abstract this code in a new function
 for page in pdfReader.pages:
     print('PAGE: ', PAGE_NUMBER)
     text_split_in_lines = page.extract_text().splitlines()
