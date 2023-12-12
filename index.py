@@ -53,6 +53,7 @@ for page in pdfReader.pages:
     print('PAGE: ', PAGE_NUMBER)
     text_split_in_lines = page.extract_text().splitlines()
     print(text_split_in_lines)
+    # Creating text to find in pdf
     TEXT_TO_FIND = 'Salario convenio'
     result = search_in_lines(text_split_in_lines, TEXT_TO_FIND)
     print(result)
